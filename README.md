@@ -28,3 +28,5 @@ A web-based tool that translates text in **Telugu**, **Hindi**, and **English** 
 - **Speech Synthesis**: Web Speech API  
 - **Virtual Keyboard**: Custom JS-based keyboard components  
 - **Braille Mapping**: Unicode-based direct mapping (1:1)
+  
+If you have any questions, suggestions, or would like to collaborate, feel free to reach out via the email on my GitHub profile.
