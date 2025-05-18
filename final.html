@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braille Translator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Hide the keyboards initially */
+        #telugu-keyboard, #hindi-keyboard {
+            display: none;
+        }
+        /* Hide the Keyboard button initially */
+        #keyboard-button {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Braille Translator for Indian Languages</h1>
+    <button id="instructions-button" onclick="showCharts()">i</button>
+
+
+    <div id="translator-container">
+        <!-- Left Side: Input Text -->
+        <div class="form-group" id="input-section">
+            <label for="select-language">Select Language:</label>
+            <select id="select-language" onchange="toggleKeyboard()">
+                <option value="english">English</option>
+                <option value="telugu">Telugu</option>
+                <option value="hindi">Hindi</option>
+            </select>
+            <br><br>
+
+            <label for="input-text">Enter Text:</label>
+            <textarea id="input-text" placeholder="Enter your text here"></textarea>
+
+            <button type="button" onclick="translateText()">Translate</button>
+            <button type="button" onclick="clearText()">Clear</button>
+            <button type="button" onclick="Keyboard()">Keyboard</button>
+
+        </div>
+
+        <!-- Right Side: Braille Translation -->
+        <div class="output-section" id="output-section">
+            <h3>Braille Translation:</h3>
+            <textarea id="braille-translation" readonly placeholder="Braille translation will appear here"></textarea>
+            <button id="print-button" onclick="printTranslation()">Print</button>
+            <button type="button" onclick="speakText()">Speak</button>
+        </div>
+    </div>
+
+    <!-- Hindi Keyboard -->
+    <div id="hindi-keyboard" class="keyboard">
+        <div class="keyboard-row">
+            <button onclick="addCharacter('अ', 'hindi')">अ</button>
+            <button onclick="addCharacter('आ', 'hindi')">आ</button>
+            <button onclick="addCharacter('इ', 'hindi')">इ</button>
+            <button onclick="addCharacter('ई', 'hindi')">ई</button>
+            <button onclick="addCharacter('उ', 'hindi')">उ</button>
+            <button onclick="addCharacter('ऊ', 'hindi')">ऊ</button>
+            <button onclick="addCharacter('ऋ', 'hindi')">ऋ</button>
+            <button onclick="addCharacter('ए', 'hindi')">ए</button>
+            <button onclick="addCharacter('ऐ', 'hindi')">ऐ</button>
+            <button onclick="addCharacter('ओ', 'hindi')">ओ</button>
+            <button onclick="addCharacter('औ', 'hindi')">औ</button>
+            
+            <button onclick="addCharacter('क', 'hindi')">क</button>
+            <button onclick="addCharacter('ख', 'hindi')">ख</button>
+            <button onclick="addCharacter('ग', 'hindi')">ग</button>
+            <button onclick="addCharacter('घ', 'hindi')">घ</button>
+            <button onclick="addCharacter('ङ', 'hindi')">ङ</button>
+            <button onclick="addCharacter('च', 'hindi')">च</button>
+            <button onclick="addCharacter('छ', 'hindi')">छ</button>
+            <button onclick="addCharacter('ज', 'hindi')">ज</button>
+            <button onclick="addCharacter('झ', 'hindi')">झ</button>
+            <button onclick="addCharacter('ञ', 'hindi')">ञ</button>
+       
+            <button onclick="addCharacter('ट', 'hindi')">ट</button>
+            <button onclick="addCharacter('ठ', 'hindi')">ठ</button>
+            <button onclick="addCharacter('ड', 'hindi')">ड</button>
+            <button onclick="addCharacter('ढ', 'hindi')">ढ</button>
+            <button onclick="addCharacter('ण', 'hindi')">ण</button>
+            <button onclick="addCharacter('त', 'hindi')">त</button>
+            <button onclick="addCharacter('थ', 'hindi')">थ</button>
+            <button onclick="addCharacter('द', 'hindi')">द</button>
+            <button onclick="addCharacter('ध', 'hindi')">ध</button>
+            <button onclick="addCharacter('न', 'hindi')">न</button>
+        
+            <button onclick="addCharacter('प', 'hindi')">प</button>
+            <button onclick="addCharacter('फ', 'hindi')">फ</button>
+            <button onclick="addCharacter('ब', 'hindi')">ब</button>
+            <button onclick="addCharacter('भ', 'hindi')">भ</button>
+            <button onclick="addCharacter('म', 'hindi')">म</button>
+            <button onclick="addCharacter('य', 'hindi')">य</button>
+            <button onclick="addCharacter('र', 'hindi')">र</button>
+            <button onclick="addCharacter('ल', 'hindi')">ल</button>
+            <button onclick="addCharacter('व', 'hindi')">व</button>
+            <button onclick="addCharacter('श', 'hindi')">श</button>
+            <button onclick="addCharacter('ष', 'hindi')">ष</button>
+            <button onclick="addCharacter('स', 'hindi')">स</button>
+            <button onclick="addCharacter('ह', 'hindi')">ह</button>
+
+            <button onclick="addGunintam('ा', 'hindi')">ा</button>
+            <button onclick="addGunintam('ि', 'hindi')">ि</button>
+            <button onclick="addGunintam('ी', 'hindi')">ी</button>
+            <button onclick="addGunintam('ु', 'hindi')">ु</button>
+            <button onclick="addGunintam('ू', 'hindi')">ू</button>
+            <button onclick="addGunintam('े', 'hindi')">े</button>
+            <button onclick="addGunintam('ै', 'hindi')">ै</button>
+            <button onclick="addGunintam('ो', 'hindi')">ो</button>
+            <button onclick="addGunintam('ौ', 'hindi')">ौ</button>
+            <button onclick="addGunintam('ः', 'hindi')">ः</button>
+            <button onclick="addGunintam('ँ', 'hindi')">ँ</button>
+            <button onclick="addGunintam('ं', 'hindi')">ं</button>
+            <button onclick="addGunintam('़', 'hindi')">़</button>
+        
+            <button onclick="addCharacter('०', 'hindi')">०</button>
+            <button onclick="addCharacter('१', 'hindi')">१</button>
+            <button onclick="addCharacter('२', 'hindi')">२</button>
+            <button onclick="addCharacter('३', 'hindi')">३</button>
+            <button onclick="addCharacter('४', 'hindi')">४</button>
+            <button onclick="addCharacter('५', 'hindi')">५</button>
+            <button onclick="addCharacter('६', 'hindi')">६</button>
+            <button onclick="addCharacter('७', 'hindi')">७</button>
+            <button onclick="addCharacter('८', 'hindi')">८</button>
+            <button onclick="addCharacter('९', 'hindi')">९</button>
+            <button onclick="addSpace()">Space</button>
+            <button onclick="backSpace()">Back Space</button>
+        </div>
+    </div>
+
+    <!-- Telugu Keyboard, now outside of the left div and spans full width -->
+    <div id="telugu-keyboard" class="keyboard">
+        <!-- Telugu buttons (already existing) -->
+        <div class="keyboard-row">
+            <button onclick="addCharacter('అ', 'vowel')">అ</button>
+            <button onclick="addCharacter('ఆ', 'vowel')">ఆ</button>
+            <button onclick="addCharacter('ఇ', 'vowel')">ఇ</button>
+            <button onclick="addCharacter('ఈ', 'vowel')">ఈ</button>
+            <button onclick="addCharacter('ఉ', 'vowel')">ఉ</button>
+            <button onclick="addCharacter('ఊ', 'vowel')">ఊ</button>
+            <button onclick="addCharacter('ఋ', 'vowel')">ఋ</button>
+            <button onclick="addCharacter('ఎ', 'vowel')">ఎ</button>
+            <button onclick="addCharacter('ఏ', 'vowel')">ఏ</button>
+            <button onclick="addCharacter('ఐ', 'vowel')">ఐ</button>
+            <button onclick="addCharacter('ఒ', 'vowel')">ఒ</button>
+            <button onclick="addCharacter('ఓ', 'vowel')">ఓ</button>
+            <button onclick="addCharacter('ఔ', 'vowel')">ఔ</button>
+        
+            <button onclick="addCharacter('క', 'consonant')">క</button>
+            <button onclick="addCharacter('ఖ', 'consonant')">ఖ</button>
+            <button onclick="addCharacter('గ', 'consonant')">గ</button>
+            <button onclick="addCharacter('ఘ', 'consonant')">ఘ</button>
+            <button onclick="addCharacter('ఙ', 'consonant')">ఙ</button>
+            <button onclick="addCharacter('చ', 'consonant')">చ</button>
+            <button onclick="addCharacter('ఛ', 'consonant')">ఛ</button>
+            <button onclick="addCharacter('జ', 'consonant')">జ</button>
+            <button onclick="addCharacter('ఝ', 'consonant')">ఝ</button>
+            <button onclick="addCharacter('ఞ', 'consonant')">ఞ</button>
+      
+            <button onclick="addCharacter('ట', 'consonant')">ట</button>
+            <button onclick="addCharacter('ఠ', 'consonant')">ఠ</button>
+            <button onclick="addCharacter('డ', 'consonant')">డ</button>
+            <button onclick="addCharacter('ఢ', 'consonant')">ఢ</button>
+            <button onclick="addCharacter('ణ', 'consonant')">ణ</button>
+            <button onclick="addCharacter('త', 'consonant')">త</button>
+            <button onclick="addCharacter('థ', 'consonant')">థ</button>
+            <button onclick="addCharacter('ద', 'consonant')">ద</button>
+            <button onclick="addCharacter('ధ', 'consonant')">ధ</button>
+            <button onclick="addCharacter('న', 'consonant')">న</button>
+       
+            <button onclick="addCharacter('ప', 'consonant')">ప</button>
+            <button onclick="addCharacter('ఫ', 'consonant')">ఫ</button>
+            <button onclick="addCharacter('బ', 'consonant')">బ</button>
+            <button onclick="addCharacter('భ', 'consonant')">భ</button>
+            <button onclick="addCharacter('మ', 'consonant')">మ</button>
+            <button onclick="addCharacter('య', 'consonant')">య</button>
+            <button onclick="addCharacter('ర', 'consonant')">ర</button>
+            <button onclick="addCharacter('ల', 'consonant')">ల</button>
+            <button onclick="addCharacter('వ', 'consonant')">వ</button>
+            <button onclick="addCharacter('శ', 'consonant')">శ</button>
+    
+        <button onclick="addCharacter('ష', 'consonant')">ష</button>
+        <button onclick="addCharacter('స', 'consonant')">స</button>
+        <button onclick="addCharacter('హ', 'consonant')">హ</button>
+        <button onclick="addCharacter('ళ', 'consonant')">ళ</button>
+        <button onclick="addCharacter('క్ష', 'consonant')">క్ష</button>
+        <button onclick="addCharacter('ఱ', 'consonant')">ఱ</button>
+  
+        <button onclick="addGunintam('ా')">ా</button>
+        <button onclick="addGunintam('ి')">ి</button>
+        <button onclick="addGunintam('ీ')">ీ</button>
+        <button onclick="addGunintam('ు')">ు</button>
+        <button onclick="addGunintam('ూ')">ూ</button>
+        <button onclick="addGunintam('ృ')">ృ</button>
+        
+        <button onclick="addGunintam('ె')">ె</button>
+        <button onclick="addGunintam('ే')">ే</button>
+        <button onclick="addGunintam('ై')">ై</button>
+        <button onclick="addGunintam('ొ')">ొ</button>
+        <button onclick="addGunintam('ో')">ో</button>
+        <button onclick="addGunintam('ౌ')">ౌ</button>
+    
+        <button onclick="addGunintam('ం')">ం</button>
+        <button onclick="addGunintam('ః')">ః</button>
+        <button onclick="addCharacter('౦', 'symbol')">౦</button>
+        <button onclick="addCharacter('౧', 'symbol')">౧</button>
+        <button onclick="addCharacter('౨', 'symbol')">౨</button>
+        <button onclick="addCharacter('౩', 'symbol')">౩</button>
+        <button onclick="addCharacter('౪', 'symbol')">౪</button>
+        <button onclick="addCharacter('౫', 'symbol')">౫</button>
+        <button onclick="addCharacter('౬', 'symbol')">౬</button>
+        <button onclick="addCharacter('౭', 'symbol')">౭</button>
+        <button onclick="addCharacter('౮', 'symbol')">౮</button>
+        <button onclick="addCharacter('౯', 'symbol')">౯</button>
+        <button onclick="addSpace()">Space</button>
+        <button onclick="backSpace()">Back Space</button>
+    </div>
+    </div>
+
+    <div id="braille-charts" style="display: none;">
+        <h2>English Braille Chart</h2>
+        <div id="english-braille-chart"></div>
+        <h2>Telugu Braille Chart</h2>
+        <div id="telugu-braille-chart"></div>
+        <h2>Hindi Braille Chart</h2>
+        <div id="hindi-braille-chart"></div>
+    </div>
+
+    <script src="logic.js"></script>
+    <script src="other.js"></script> 
+</body>
+</html>
